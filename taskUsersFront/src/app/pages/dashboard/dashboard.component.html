@@ -1,0 +1,52 @@
+<div class="dashboard-container">
+    <h2 class="dashboard-title">Tus tareas</h2>
+  
+    <div class="search-create-container">
+        <input
+          type="text"
+          [(ngModel)]="searchText"
+          placeholder="Buscar tareas..."
+          class="search-input"
+          (input)="onSearchChange()"
+        />
+        <button (click)="goToCreateTask()" class="create-task-button">Crear Tarea</button>
+    </div>
+  
+    <table class="task-table" *ngIf="filteredTasks.length > 0; else noTasks">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Descripción</th>
+          <th>Estado</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of filteredTasks">
+          <td>{{ task.title }}</td>
+          <td>{{ task.description }}</td>
+          <td>
+            <span [class.completed]="task.completed" [class.pending]="!task.completed">
+              {{ task.completed ? 'Completada' : 'Pendiente' }}
+            </span>
+          </td>
+          <td class="delete-cell">
+            <button (click)="deleteTask(task._id)" class="delete-button">Eliminar</button>
+          </td>
+          <td class="update-cell">
+            <button (click)="updateTask(task)" class="update-button">Actualizar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="modal" *ngIf="showModal">
+        <div class="modal-content">
+          Estado de la tarea cambiado ✔️
+        </div>
+    </div>
+      
+    <ng-template #noTasks>
+      <p class="no-tasks-message">No tienes tareas aún.</p>
+    </ng-template>
+  </div>
+  

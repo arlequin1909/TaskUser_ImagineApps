@@ -1,0 +1,35 @@
+<h2 class="form-title">Crear Nueva Tarea</h2>
+
+<div class="form-container">
+  <form (ngSubmit)="createTask()" class="task-form">
+    <label for="title">Título</label>
+    <input
+      id="title"
+      type="text"
+      [(ngModel)]="title"
+      name="title"
+      required
+      class="form-input"
+    />
+
+    <label for="description">Descripción</label>
+    <textarea
+      id="description"
+      [(ngModel)]="description"
+      name="description"
+      rows="3"
+      required
+      class="form-input"
+    ></textarea>
+
+    <label class="checkbox-label">
+      <input type="checkbox" [(ngModel)]="completed" name="completed" />
+      ¿Completada?
+    </label>
+
+    <button type="submit" class="create-task-button">Crear nueva tarea</button>
+    <button type="button" (click)="goBack()" class="back-button">Volver</button>
+  </form>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+</div>
